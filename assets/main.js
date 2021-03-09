@@ -4,9 +4,12 @@
 var arrayNum_Position_Bombe;
 var arraiNumInput;
 
+var arrayNum_final = new Array();
+
 // TODO:  Creare div scelta difficoiltà ed aggiungere l'input a questa variabile
 var difficulty = "EASY";
-
+console.log(Array_Num_difficulty("EASY"));
+// Array_Num_difficulty("EASY");
 
 // VARIABILI ELEMENTI HTML
 var container_Intro_Game = document.getElementById('container_Intro_Game');
@@ -34,43 +37,95 @@ btn_Start_Campominato.addEventListener("click", function(e){
 
 
 
+
+console.log(controllerNumInput(3,arrayNum_final));
+
 // FUNZIONI
+// funzione che controlla se numero input e "Una Bomba!!!"  (Un ciclo di suspense..)
+function controllerNumInput(numInput,array){
+    var includes_numInput = false;
+    if (array.includes(numInput)) {
+        includes_numInput = true;
+    }else {
+        includes_numInput = false;
+    }
+    return includes_numInput;
+}
 
 // Function create array num generate
 function Array_Num_difficulty(difficulty){
-    var arrayNum_final;
-    switch (difficoltà) {
+    // Popolamento ARRAY caselle gioco undefined con 0 escluso nello scopo finale
+    arrayNum_final.length = 101;
+
+    switch (difficulty) {
         case "EASY":
-            arrayNum_final = createArray_Num_Position_Bombe(100).slice();
+            //Array d'appoggio numeri generati
+            var arrayTemp = createArray_Num_Position_Bombe(100);
+
+            for (var i = 0; i < 16; i++) {
+
+                var num_Value_Index = arrayTemp[i];
+                console.log(arrayTemp[i]);
+
+                // Aggiunta del valore all'indice corrispondente nell arrayNum_final
+                // Chiamata alla funzione insertIndex.
+                insertIndex(num_Value_Index, num_Value_Index, arrayNum_final);
+            }
+
         break;
 
         case "EXPERT":
-            createArray_Num_Position_Bombe(80).slice();
+            //Array d'appoggio numeri generati
+            var arrayTemp = createArray_Num_Position_Bombe(100);
+
+            for (var i = 0; i < 16; i++) {
+
+                var num_Value_Index = arrayTemp[i];
+
+                // Aggiunta del valore all'indice corrispondente nell arrayNum_final
+                // Chiamata alla funzione insertIndex.
+                insertIndex(num_Value_Index, num_Value_Index, arrayNum_final);
+            }
         break;
 
         case "PRO":
-            createArray_Num_Position_Bombe(60).slice();
+            //Array d'appoggio numeri generati
+            var arrayTemp = createArray_Num_Position_Bombe(100);
+
+            for (var i = 0; i < 16; i++) {
+
+                var num_Value_Index = arrayTemp[i];
+                console.log(arrayTemp[i]);
+
+                // Aggiunta del valore all'indice corrispondente nell arrayNum_final
+                // Chiamata alla funzione insertIndex.
+                insertIndex(num_Value_Index, num_Value_Index, arrayNum_final);
+            }
         break;
-
-        default:
-            createArray_Num_Position_Bombe(100).slice();
     }
-}
 
-console.log(createArray_Num_Position_Bombe(16));
-function createArray_Num_Position_Bombe(numbers_ToGenerate){
-    var controllo = 0;
-    var arrayGenerate = new Array();
 
-    while (controllo < 16) {
-        var numGenerate = Math.floor(Math.random() * 100 + 1);
+    // Ritorno della funzione main
+    return arrayNum_final;
 
-        if (!arrayGenerate.includes(parseInt(numGenerate))) {
-            arrayGenerate.push(numGenerate);
-            controllo += 1;
+    function createArray_Num_Position_Bombe(numbers_ToGenerate){
+        var controllo = 0;
+        var arrayGenerate = new Array();
+
+        while (controllo <= 16) {
+            var numGenerate = Math.floor(Math.random() * numbers_ToGenerate + 1);
+
+            if (!arrayGenerate.includes(parseInt(numGenerate))) {
+                arrayGenerate.push(numGenerate);
+                controllo += 1;
+            }
         }
-
-        console.log(controllo);
+        return arrayGenerate;
     }
-    return arrayGenerate;
+
+    // Funzione che aggiunge all'indice specificato ed elimina l'elemento all'indice precedente all'indice dell' aggiunta
+    function insertIndex(index,value){
+        // arrayNum_final variabile locale Array_Num_difficulty.
+        arrayNum_final.splice(index, 1, value);
+    }
 }
