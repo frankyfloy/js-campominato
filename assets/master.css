@@ -1,0 +1,27 @@
+*{
+    font-family: "Gill Sans", sans-serif;
+    font-weight: bold;
+}
+
+body{
+    height: 100vh;
+    background-color: #000000;
+}
+
+#container_Header{
+    height: 220px;
+    width: 300px;
+    border-radius: 10px;
+}
+
+#container-CampoMinato{
+    height: 50vh;
+    width: 60vh;
+}
+
+
+
+header{
+    color: yellow;
+    font-size: 20px;
+}
