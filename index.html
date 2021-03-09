@@ -16,15 +16,23 @@
 
     <body class="d-flex flex-column justify-content-around text-center">
 
-        <div id="container_Header" class="container d-flex flex-column justify-content-around text-primary bg-success">
+        <div id="container_Controller_Game" class="container d-flex flex-column justify-content-around text-primary bg-success">
 
-            <header class="header">
-                <h3 class="animate__animated animate__flip"><strong>Campo Minato...Sei pronto?</strong></h3>
-            </header>
+            <div id="container_Intro_Game">
+                <header class="header_Start_Game">
+                    <h3 class="animate__animated animate__flip"><strong>Campo Minato...Sei pronto?</strong></h3>
+                </header>
 
-            <button id="btn_Palindromo" class="btn btn-primary animate__animated animate__pulse" type="submit" >Gioca</button>
+                <button id="btn_Start_Campominato" class="btn btn-primary mt-3 animate__animated animate__pulse" type="submit" >Gioca</button>
+            </div>
 
-            <div id="container_Input_Word_Pali" class="input-group d-none">
+
+            <div id="container_Input_Num" class="input-group d-none text-center">
+
+                <header class="header_Run_Game ">
+                    <h3 class="text-uppercase animate__animated animate__pulse"><strong>Attento alle bombe</strong></h3>
+                </header>
+
                 <div class="col-12">
                     <p class="text-dark mb-0"><strong>Inserisci un numero :</strong></p>
                 </div>

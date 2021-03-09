@@ -8,8 +8,8 @@ body{
     background-color: #000000;
 }
 
-#container_Header{
-    height: 220px;
+#container_Controller_Game{
+    height: 230px;
     width: 300px;
     border-radius: 10px;
 }
