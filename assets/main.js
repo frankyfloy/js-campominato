@@ -5,7 +5,7 @@ var arrayNum_Position_Bombe;
 var arraiNumInput;
 
 // TODO:  Creare div scelta difficoiltà ed aggiungere l'input a questa variabile
-var difficoltà = "EASY";
+var difficulty = "EASY";
 
 
 // VARIABILI ELEMENTI HTML
@@ -37,37 +37,40 @@ btn_Start_Campominato.addEventListener("click", function(e){
 // FUNZIONI
 
 // Function create array num generate
-// function createArray_Num_Position_Bombe(difficoltà){
-//     switch (difficoltà) {
-//         case "EASY":
-//
-//         break;
-//
-//         case "EXPERT":
-//
-//         break;
-//
-//         case "PRO":
-//
-//         break;
-//
-//         default:
-//
-//     }
-// }
+function Array_Num_difficulty(difficulty){
+    var arrayNum_final;
+    switch (difficoltà) {
+        case "EASY":
+            arrayNum_final = createArray_Num_Position_Bombe(100).slice();
+        break;
+
+        case "EXPERT":
+            createArray_Num_Position_Bombe(80).slice();
+        break;
+
+        case "PRO":
+            createArray_Num_Position_Bombe(60).slice();
+        break;
+
+        default:
+            createArray_Num_Position_Bombe(100).slice();
+    }
+}
 
 console.log(createArray_Num_Position_Bombe(16));
 function createArray_Num_Position_Bombe(numbers_ToGenerate){
     var controllo = 0;
     var arrayGenerate = new Array();
 
-    while (controllo != 16) {
+    while (controllo < 16) {
         var numGenerate = Math.floor(Math.random() * 100 + 1);
 
         if (!arrayGenerate.includes(parseInt(numGenerate))) {
             arrayGenerate.push(numGenerate);
+            controllo += 1;
         }
-        controllo++;
+
+        console.log(controllo);
     }
     return arrayGenerate;
 }
