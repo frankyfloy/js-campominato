@@ -4,12 +4,8 @@
 // var arrayNum_Position_Bombe;
 var arrayNum_final = new Array();
 var contatore = 0;
-var difficultyInput;
+var difficulty;
 
-// COSTANTI
-var EASY = 100;
-var EXPERT = 80;
-var PRO = 60;
 
 // VARIABILE ELEMENTO CONTATORE TURNI
 var numTurnWin = document.getElementById('numTurnWin');
@@ -27,6 +23,10 @@ var header_Run_Game = document.getElementById('header_Run_Game');
 var btn_Start_Campominato = document.getElementById('btn_Start_Campominato');
 
 var container_Input_Num = document.getElementById('container_Input_Num');
+
+var container_Input_Difficulty = document.getElementById('container_Input_Difficulty');
+
+var container_CampoMinato = document.getElementById('container_CampoMinato');
 
 var table_Campominato = document.getElementById('table_Campominato');
 
@@ -66,10 +66,10 @@ btn_Start_Campominato.addEventListener("click", function(e){
 // INIZIA IL GIOCO SCELTA DIFFICOLTà
 btn_Easy.addEventListener("click", function(e){
     // Avvio la funzione di creazione numeri generati EASY
-    array_Num_difficulty(EASY);
-    difficultyInput = 100;
-
-    crateTable(difficultyInput);
+    difficulty = 100;
+    array_Num_difficulty(difficulty);
+    // Creo tabella
+    crateTable(difficulty);
 
     container_Input_Difficulty.classList.add("d-none");
     container_Input_Num.classList.remove("d-none");
@@ -77,10 +77,10 @@ btn_Easy.addEventListener("click", function(e){
 
 btn_Expert.addEventListener("click", function(e){
     // Avvio la funzione di creazione numeri generati EXPERT
-    array_Num_difficulty(EXPERT);
-    difficultyInput = 80;
-
-    crateTable(difficultyInput);
+    difficulty = 80;
+    array_Num_difficulty(difficulty);
+    // Creo tabella
+    crateTable(difficulty);
 
     container_Input_Difficulty.classList.add("d-none");
     container_Input_Num.classList.remove("d-none");
@@ -88,10 +88,10 @@ btn_Expert.addEventListener("click", function(e){
 
 btn_Pro.addEventListener("click", function(e){
     // Avvio la funzione di creazione numeri generati PRO
-    array_Num_difficulty(PRO);
-    difficultyInput = 60;
-
-    crateTable(difficultyInput);
+    difficulty = 60;
+    array_Num_difficulty(difficulty);
+    // Creo tabella
+    crateTable(difficulty);
 
     container_Input_Difficulty.classList.add("d-none");
     container_Input_Num.classList.remove("d-none");
@@ -109,15 +109,12 @@ btn_input_Num.addEventListener("click", function(e){
     var inputNum = parseInt(document.getElementById('inputNum').value);
     contatore ++;
 
-
-// TODO:  DA QUI-------- BLOCCO LIMITE MASSIMO VITTORIE PUNTEGGIO ECC..FARE LA GRIGLIA CON CASELLE CON  BG DINAMICO
-
     // Controllo limite massimo punteggio raggiunto
-    if (contatore == difficultyInput)
+    if (contatore == difficulty){
         container_win.classList.remove("d-none");
-
-    // Controllo Numero inserito, true se è all'interno
+    }
     else if (controllerNumInput(inputNum,arrayNum_final)) {
+        // Controllo Numero inserito, true se è all'interno
         container_loose.classList.remove("d-none");
 
         // TODO: TROVA UNA SOLUZIONE
@@ -134,31 +131,6 @@ btn_input_Num.addEventListener("click", function(e){
 
 });
 
-// TODO: stai creando gli elementi della tabella
-// CREAZIONE TABELLA CAMPOMINATO
-function crateTable(numItem){
-    for (var i = 1; i <= 10; i++) {
-        var rowTable = document.createElement("TR");
-        rowTable.classList.add("rowTable_Dynamic");
-
-        table_Campominato.appendChild(rowTable);
-
-        for (var i = 1; i <= numItem / 10; i++) {
-            var cellTable = document.createElement("TD");
-            rowTable.appendChild(cellTable);
-        }
-    }
-
-
-}
-
-
-
-
-
-
-
-
 btn_Win.addEventListener("click", function(e){
     container_win.classList.add("d-none");
     container_Input_Num.classList.remove("d-none");
@@ -173,7 +145,30 @@ btn_Loose.addEventListener("click", function(e){
 
 
 
+
 // FUNZIONI
+// CREAZIONE TABELLA CAMPOMINATO
+function crateTable(numItem){
+
+    for (var i = 1; i <= numItem / 10; i++) {
+        var rowTable = document.createElement("TR");
+        rowTable.classList.add("rowTable_Dynamic-" + i);
+
+        table_Campominato.appendChild(rowTable);
+
+        for (var j = 1; j <=  10; j++) {
+            var cellTable = document.createElement("TD");
+            // cellTable.classList.add("cellTable_Dynamic-" + i);)
+            rowTable.appendChild(cellTable);
+        }
+    }
+
+    // VISUALIZZO LA TABELLA
+    container_CampoMinato.classList.remove("d-none");
+    container_CampoMinato.classList.add("d-flex");
+}
+
+
 // funzione che controlla se numero input e "Una Bomba!!!"  (Un ciclo di suspense..)
 function controllerNumInput(numInput,array){
     console.log(numInput + "-----------");
@@ -191,9 +186,10 @@ function controllerNumInput(numInput,array){
 // Function create array num generate
 function array_Num_difficulty(difficulty){
 
+    console.log(difficulty);
 
     switch (difficulty) {
-        case "EASY":
+        case 100:
             // Popolamento ARRAY caselle gioco undefined con 0 escluso nello scopo finale
             arrayNum_final.length = 100 + 1;
 
@@ -210,12 +206,12 @@ function array_Num_difficulty(difficulty){
 
                 // Aggiunta del valore all'indice corrispondente nell arrayNum_final
                 // Chiamata alla funzione insertIndex.
-                insertIndex(num_Value_Index, num_Value_Index, arrayNum_final);
+                insertIndex(num_Value_Index, num_Value_Index);
             }
 
         break;
 
-        case "EXPERT":
+        case 80:
             // Popolamento ARRAY caselle gioco undefined con 0 escluso nello scopo finale
             arrayNum_final.length = 80 + 1;
 
@@ -227,15 +223,15 @@ function array_Num_difficulty(difficulty){
                 var num_Value_Index = arrayTemp[i];
 
                 // console dati lista
+                console.log("----------------------");
                 console.log(arrayTemp[i]);
-
                 // Aggiunta del valore all'indice corrispondente nell arrayNum_final
                 // Chiamata alla funzione insertIndex.
-                insertIndex(num_Value_Index, num_Value_Index, arrayNum_final);
+                insertIndex(num_Value_Index, num_Value_Index);
             }
         break;
 
-        case "PRO":
+        case 60:
             // Popolamento ARRAY caselle gioco undefined con 0 escluso nello scopo finale
             arrayNum_final.length = 60 + 1;
 
@@ -251,7 +247,7 @@ function array_Num_difficulty(difficulty){
 
                 // Aggiunta del valore all'indice corrispondente nell arrayNum_final
                 // Chiamata alla funzione insertIndex.
-                insertIndex(num_Value_Index, num_Value_Index, arrayNum_final);
+                insertIndex(num_Value_Index, num_Value_Index);
             }
         break;
     }
