@@ -4,6 +4,7 @@
 // var arrayNum_Position_Bombe;
 var arrayNum_final = new Array();
 var contatore = 0;
+var difficultyInput;
 
 // COSTANTI
 var EASY = 100;
@@ -26,6 +27,8 @@ var header_Run_Game = document.getElementById('header_Run_Game');
 var btn_Start_Campominato = document.getElementById('btn_Start_Campominato');
 
 var container_Input_Num = document.getElementById('container_Input_Num');
+
+var table_Campominato = document.getElementById('table_Campominato');
 
 // CONTENITORI ESITO
 var container_win = document.getElementById('container_win');
@@ -63,7 +66,10 @@ btn_Start_Campominato.addEventListener("click", function(e){
 // INIZIA IL GIOCO SCELTA DIFFICOLTà
 btn_Easy.addEventListener("click", function(e){
     // Avvio la funzione di creazione numeri generati EASY
-    array_Num_difficulty(EASY)
+    array_Num_difficulty(EASY);
+    difficultyInput = 100;
+
+    crateTable(difficultyInput);
 
     container_Input_Difficulty.classList.add("d-none");
     container_Input_Num.classList.remove("d-none");
@@ -71,14 +77,22 @@ btn_Easy.addEventListener("click", function(e){
 
 btn_Expert.addEventListener("click", function(e){
     // Avvio la funzione di creazione numeri generati EXPERT
-    array_Num_difficulty(EXPERT)
+    array_Num_difficulty(EXPERT);
+    difficultyInput = 80;
+
+    crateTable(difficultyInput);
+
     container_Input_Difficulty.classList.add("d-none");
     container_Input_Num.classList.remove("d-none");
 });
 
 btn_Pro.addEventListener("click", function(e){
     // Avvio la funzione di creazione numeri generati PRO
-    array_Num_difficulty(PRO)
+    array_Num_difficulty(PRO);
+    difficultyInput = 60;
+
+    crateTable(difficultyInput);
+
     container_Input_Difficulty.classList.add("d-none");
     container_Input_Num.classList.remove("d-none");
 });
@@ -98,8 +112,12 @@ btn_input_Num.addEventListener("click", function(e){
 
 // TODO:  DA QUI-------- BLOCCO LIMITE MASSIMO VITTORIE PUNTEGGIO ECC..FARE LA GRIGLIA CON CASELLE CON  BG DINAMICO
 
+    // Controllo limite massimo punteggio raggiunto
+    if (contatore == difficultyInput)
+        container_win.classList.remove("d-none");
+
     // Controllo Numero inserito, true se è all'interno
-    if (controllerNumInput(inputNum,arrayNum_final)) {
+    else if (controllerNumInput(inputNum,arrayNum_final)) {
         container_loose.classList.remove("d-none");
 
         // TODO: TROVA UNA SOLUZIONE
@@ -119,15 +137,19 @@ btn_input_Num.addEventListener("click", function(e){
 // TODO: stai creando gli elementi della tabella
 // CREAZIONE TABELLA CAMPOMINATO
 function crateTable(numItem){
-    for (var i = 1; i <= numItem; i++) {
-        if (numItem == 100) {
+    for (var i = 1; i <= 10; i++) {
+        var rowTable = document.createElement("TR");
+        rowTable.classList.add("rowTable_Dynamic");
 
-        } else if (numItem == 80) {
+        table_Campominato.appendChild(rowTable);
 
-        } else if (numItem == 60) {
-
+        for (var i = 1; i <= numItem / 10; i++) {
+            var cellTable = document.createElement("TD");
+            rowTable.appendChild(cellTable);
         }
     }
+
+
 }
 
 
