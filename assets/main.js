@@ -2,10 +2,13 @@
 
 // VARIABILI PROGRAMMA
 // var arrayNum_Position_Bombe;
-var difficulty_Input_Btn;
 var arrayNum_final = new Array();
 var contatore = 0;
 
+// COSTANTI
+var EASY = 100;
+var EXPERT = 80;
+var PRO = 60;
 
 // VARIABILE ELEMENTO CONTATORE TURNI
 var numTurnWin = document.getElementById('numTurnWin');
@@ -26,7 +29,6 @@ var container_Input_Num = document.getElementById('container_Input_Num');
 
 // CONTENITORI ESITO
 var container_win = document.getElementById('container_win');
-
 var container_loose = document.getElementById('container_loose');
 
 
@@ -61,21 +63,22 @@ btn_Start_Campominato.addEventListener("click", function(e){
 // INIZIA IL GIOCO SCELTA DIFFICOLTà
 btn_Easy.addEventListener("click", function(e){
     // Avvio la funzione di creazione numeri generati EASY
-    array_Num_difficulty("EASY")
+    array_Num_difficulty(EASY)
+
     container_Input_Difficulty.classList.add("d-none");
     container_Input_Num.classList.remove("d-none");
 });
 
 btn_Expert.addEventListener("click", function(e){
     // Avvio la funzione di creazione numeri generati EXPERT
-    array_Num_difficulty("EXPERT")
+    array_Num_difficulty(EXPERT)
     container_Input_Difficulty.classList.add("d-none");
     container_Input_Num.classList.remove("d-none");
 });
 
 btn_Pro.addEventListener("click", function(e){
     // Avvio la funzione di creazione numeri generati PRO
-    array_Num_difficulty("PRO")
+    array_Num_difficulty(PRO)
     container_Input_Difficulty.classList.add("d-none");
     container_Input_Num.classList.remove("d-none");
 });
@@ -83,11 +86,8 @@ btn_Pro.addEventListener("click", function(e){
 
 
 
+
 //CONTROLLO VINCITA --------------------------------
-
-
-
-
 btn_input_Num.addEventListener("click", function(e){
     container_Input_Num.classList.add("d-none");
 
@@ -97,27 +97,45 @@ btn_input_Num.addEventListener("click", function(e){
 
 
 // TODO:  DA QUI-------- BLOCCO LIMITE MASSIMO VITTORIE PUNTEGGIO ECC..FARE LA GRIGLIA CON CASELLE CON  BG DINAMICO
+
     // Controllo Numero inserito, true se è all'interno
     if (controllerNumInput(inputNum,arrayNum_final)) {
         container_loose.classList.remove("d-none");
 
-        var strEsitoNeg = "Hai Perso al " + contatore +"° turno ):";
-
-        numTurnWin.innerHTML = strEsitoNeg;
+        // TODO: TROVA UNA SOLUZIONE
+        // numTurnWin.innerHTML = .......
     }else{
         container_win.classList.remove("d-none");
 
-        var strEsitoPos = "Hai Vinto il " + contatore + "° turno!!!";
-
-        numTurnLoose.innerHTML = strEsitoPos;
+        // TODO: TROVA UNA SOLUZIONE
+        // numTurnWin.innerHTML = .......
     }
-    numTurnLoose.innerHTML += strEsitoPos;
-
-
+    // LOG DEBUG
     console.log(arrayNum_final);
     console.log(contatore);
 
 });
+
+// TODO: stai creando gli elementi della tabella
+// CREAZIONE TABELLA CAMPOMINATO
+function crateTable(numItem){
+    for (var i = 1; i <= numItem; i++) {
+        if (numItem == 100) {
+
+        } else if (numItem == 80) {
+
+        } else if (numItem == 60) {
+
+        }
+    }
+}
+
+
+
+
+
+
+
 
 btn_Win.addEventListener("click", function(e){
     container_win.classList.add("d-none");
@@ -216,10 +234,10 @@ function array_Num_difficulty(difficulty){
         break;
     }
 
-
     // Ritorno della funzione main
     return arrayNum_final;
 
+    // INNER FUNCTION PRIVATA AD "array_Num_difficulty";
     function createArray_Num_Position_Bombe(numbers_ToGenerate){
         var controllo = 0;
         var arrayGenerate = new Array();
@@ -237,7 +255,7 @@ function array_Num_difficulty(difficulty){
 
 }
 
-// Funzione che aggiunge all'indice specificato ed elimina l'elemento all'indice precedente all'indice dell' aggiunta
+// Funzione che aggiunge all'indice specificato ed elimina l'elemento all'indice in questione
 function insertIndex(index,value){
     // arrayNum_final variabile locale Array_Num_difficulty.
     arrayNum_final.splice(index, 1, value);
