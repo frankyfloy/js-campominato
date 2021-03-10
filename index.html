@@ -16,14 +16,29 @@
 
     <body class="d-flex flex-column justify-content-around text-center">
 
-        <div id="container_Controller_Game" class="container d-flex flex-column justify-content-around text-primary bg-success">
+        <div id="container_Controller_Game" class="container d-flex flex-column justify-content-around bg-success">
 
             <div id="container_Intro_Game">
                 <header class="header_Start_Game">
-                    <h3 class="animate__animated animate__flip"><strong>Campo Minato...Sei pronto?</strong></h3>
+                    <h3 class="animate__animated animate__zoomIn"><strong>Campo Minato...Sei pronto?</strong></h3>
                 </header>
 
                 <button id="btn_Start_Campominato" class="btn btn-primary mt-3 animate__animated animate__pulse" type="submit" >Gioca</button>
+            </div>
+
+            <div id="container_Input_Difficulty" class="input-group d-none text-center">
+
+                <header class="header_Start_Game col-12">
+                    <h4 class="text-uppercase"><strong >Scegli la difficoltà</strong></h4>
+                </header>
+
+
+                <button id="btn_Easy" class="btn btn-primary btn-block animate__animated animate__bounceIn" type="button"><strong>EASY</strong></button>
+
+                <button id="btn_Expert" class="btn btn-warning btn-block animate__animated animate__bounceIn animate__delay-1s" type="button"><strong>EXPERT</strong></button>
+
+                <button id="btn_Pro" class="btn btn-danger btn-block animate__animated animate__bounceIn animate__delay-2s" type="button"><strong>PRO</strong></button>
+
             </div>
 
 
@@ -34,15 +49,28 @@
                 </header>
 
                 <div class="col-12">
-                    <p class="text-dark mb-0"><strong>Inserisci un numero :</strong></p>
+                    <h5 class="text-dark mb-0"><strong>Inserisci un numero :</strong></h5>
                 </div>
 
                 <div class="input-group-prepend col-12 mt-3 d-block">
                     <input id="inputNum" type="text" class="form-control" aria-describedby="basic-addon1">
 
-                    <button id="btn_input_Num" class="btn btn-primary mt-2" type="button">Vai</button>
+                    <button id="btn_input_Num" class="btn btn-primary rounded mt-2" type="button">Vai</button>
                 </div>
             </div>
+
+            <div id="container_win" class="d-none justify-content-center animate__animated animate__heartBeat">
+                <h1 id="numTurnWin" class="my-h1-win-loose">Hai Vinto il turno!!!</h1>
+                <button id="btn_Win" class="btn btn-primary btn-block animate__animated animate__bounceIn" type="button"><strong>Next</strong></button>
+
+            </div>
+
+            <div id="container_loose" class="d-none justify-content-center animate__animated animate__heartBeat">
+                <h1 id="numTurnLoose" class="my-h1-win-loose">Hai Perso :(</h1>
+                <button id="btn_Loose" class="btn btn-primary btn-block animate__animated animate__bounceIn" type="button"><strong>Vuoi riprovare?</strong></button>
+            </div>
+
+
 
         </div>
 

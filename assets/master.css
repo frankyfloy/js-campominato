@@ -1,6 +1,5 @@
 *{
     font-family: "Gill Sans", sans-serif;
-    font-weight: bold;
 }
 
 body{
@@ -21,7 +20,11 @@ body{
 
 
 
-header{
+header,.my-h1-win-loose{
     color: yellow;
+}
+
+header{
     font-size: 20px;
+    text-shadow: black 0.1em 0.1em 0.1em;
 }
