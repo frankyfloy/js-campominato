@@ -39,3 +39,8 @@ header,#h1-win{
 td,tr{
     border: 5px solid yellow;
 }
+
+.bomba{
+    background-color: red;
+    color: white;
+}

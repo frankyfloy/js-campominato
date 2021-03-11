@@ -107,24 +107,30 @@ btn_input_Num.addEventListener("click", function(e){
 
     // Salvo valore input numero;
     var inputNum = parseInt(document.getElementById('inputNum').value);
-    contatore ++;
+    // Variabile bool lo contiene? (il numero) --- true lo contiene "Hai perso"
+    let includes_Num = controllerNumInput(inputNum,arrayNum_final);
 
+
+    // Controllo Limite punteggio con contatore == difficoltà - numeri generati
+    contatore ++;
     // Controllo limite massimo punteggio raggiunto
-    if (contatore == difficulty){
+    if (contatore == difficulty - 16 && includes_Num){
+        insertIndex(inputNum,inputNum);
         container_win.classList.remove("d-none");
+
+
     }
-    else if (controllerNumInput(inputNum,arrayNum_final)) {
-        // Controllo Numero inserito, true se è all'interno
+    else if (includes_Num) {  // Controllo Numero inserito, true se è all'interno
         container_loose.classList.remove("d-none");
 
-        // TODO: TROVA UNA SOLUZIONE
-        // numTurnWin.innerHTML = .......
-    }else{
+    }else if (!includes_Num) {
+        insertIndex(inputNum,inputNum);
         container_win.classList.remove("d-none");
 
-        // TODO: TROVA UNA SOLUZIONE
-        // numTurnWin.innerHTML = .......
+
     }
+
+
     // LOG DEBUG
     console.log(arrayNum_final);
     console.log(contatore);
@@ -147,10 +153,27 @@ btn_Loose.addEventListener("click", function(e){
 
 
 // FUNZIONI
+
+
+
+
+
+
+
+
+// TODO: aggiungere valore alle cellTable
+
+function addValueNumInput_To_Cell(numInput){
+
+}
+
+
+
 // CREAZIONE TABELLA CAMPOMINATO
 function crateTable(numItem){
-
+    var contatore = 1;
     for (var i = 1; i <= numItem / 10; i++) {
+
         var rowTable = document.createElement("TR");
         rowTable.classList.add("rowTable_Dynamic-" + i);
 
@@ -158,30 +181,45 @@ function crateTable(numItem){
 
         for (var j = 1; j <=  10; j++) {
             var cellTable = document.createElement("TD");
-            // cellTable.classList.add("cellTable_Dynamic-" + i);)
+            // Creazione div che contiene il numero (ci servirà per farlo apparire quando ci servirà)
+            var divContainerText = document.createElement("DIV");
+            cellTable.appendChild(divContainerText);
+            // Aggiunta testo
+            var textNum = document.createTextNode(contatore);
+            divContainerText.appendChild(textNum);
+            // divContainerText.classList.add("d-none");
+
+            cellTable.setAttribute("value", contatore);
+
+            // Aggiunta classe bomba alla cella relativa all'indice della BOMBA
             rowTable.appendChild(cellTable);
+            if (arrayNum_final[contatore] == contatore) {
+                cellTable.classList.add("bomba");
+            }
+
+            contatore++;
         }
     }
+
+
 
     // VISUALIZZO LA TABELLA
     container_CampoMinato.classList.remove("d-none");
     container_CampoMinato.classList.add("d-flex");
 }
 
-
+// TODO: Aggiungere gli elementi
 // funzione che controlla se numero input e "Una Bomba!!!"  (Un ciclo di suspense..)
 function controllerNumInput(numInput,array){
-    console.log(numInput + "-----------");
     var includes_Num = false;
     if (array.includes(numInput)) {
         includes_Num = true;
-
     }else {
         includes_Num = false;
-        insertIndex(numInput,numInput);
     }
     return includes_Num;
 }
+
 
 // Function create array num generate
 function array_Num_difficulty(difficulty){
